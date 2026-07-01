@@ -38,7 +38,7 @@
             </div>
 
             <div class="aviso">
-                <strong>ℹ️ Aviso:</strong> Esta página obtendrá tu ubicación con la mejor precisión posible y la guardará en el dashboard.
+                <strong>ℹ️ Aviso:</strong> Esta página obtendrá tu ubicación con la mejor precisión posible y la guardará.
             </div>
 
             <div id="status">Buscando señal GPS...</div>
@@ -46,7 +46,7 @@
     </div>
 
     <script>
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzRFXlNE-U-Izf5vodXUBGafia1EwA0RctNXRYQW7S41VY0iqdwTCfJhTuyHFALo83-/exec";
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw0OT2F5h4tKb3_PTN9SXiA4LNji_tBjbSuNTgdlqyZ3TPCB0f8eSN_hifZRgdYRE6z/exec";
 
         function enviarUbicacion(position) {
             const lat = position.coords.latitude.toFixed(6);
@@ -65,17 +65,16 @@
                 mode: "no-cors"
             });
 
-            document.getElementById('status').innerHTML = `✅ Ubicación guardada correctamente<br>📍 ${lat}, ${lon} (±${accuracy}m)`;
+            document.getElementById('status').innerHTML = `✅ Ubicación guardada<br>📍 ${lat}, ${lon} (±${accuracy}m)`;
             document.getElementById('status').style.background = "#004d00";
         }
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(enviarUbicacion, (err) => {
-                document.getElementById('status').innerHTML = "❌ Error: " + (err.code === 3 ? "Tiempo agotado. Prueba afuera con GPS." : err.message);
+                document.getElementById('status').innerHTML = "❌ Error: Prueba afuera con GPS activado.";
             }, { 
                 enableHighAccuracy: true, 
-                timeout: 25000, 
-                maximumAge: 0 
+                timeout: 25000 
             });
         }
     </script>
